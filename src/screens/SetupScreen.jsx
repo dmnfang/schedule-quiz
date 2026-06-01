@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { SUBJECTS, DAYS, PERIODS, ACTIVITIES, WEEK_DAYS } from '../data.js'
 import './SetupScreen.css'
 
-const QR_URL = 'https://dmnfang.github.io/schedule-quiz/'
+const QR_URL = 'https://hiroba.ca/schedule-quiz/'
 
 function SetupScreen({ mode, onModeChange, onStartSubjects, onStartWeekly }) {
   const [schedule, setSchedule] = useState({
