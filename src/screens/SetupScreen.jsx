@@ -101,11 +101,9 @@ function SetupScreen({ mode, onModeChange, onStartSubjects, onStartWeekly }) {
     </button>
   </div>
   <div className="topbar-actions">
-    {mode === 'activities' && (
-      <button className="qr-btn" onClick={() => setQrEnlarged(true)}>
-        QR Code
-      </button>
-    )}
+    <button className="qr-btn" onClick={() => setQrEnlarged(true)}>
+  QR Code
+</button>
     <button
       className="start-btn"
       disabled={mode === 'subjects' ? !canStartSubjects : !canStartWeekly}
