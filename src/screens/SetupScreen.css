@@ -349,3 +349,30 @@
 }
 
 .qr-btn:hover { border-color: var(--stroke-medium); }
+
+.setup-breadcrumb {
+  display: flex; align-items: center; gap: 8px;
+}
+
+.bc-home, .bc-mid {
+  font-family: var(--font-display);
+  font-size: 28px; font-weight: 600;
+  line-height: 40px;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.bc-home:hover, .bc-mid:hover { color: var(--text-primary); }
+
+.bc-sep {
+  font-family: var(--font-display);
+  font-size: 24px; color: var(--text-disabled);
+}
+
+.bc-current {
+  font-family: var(--font-display);
+  font-size: 28px; font-weight: 600;
+  line-height: 40px;
+  color: var(--text-primary);
+}

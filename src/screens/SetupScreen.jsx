@@ -84,7 +84,13 @@ function SetupScreen({ mode, onModeChange, onStartSubjects, onStartWeekly }) {
   return (
     <div className="setup-screen">
       <div className="setup-topbar">
-        <div className="setup-title">📅 Schedule Quiz</div>
+        <div className="setup-breadcrumb">
+  <a className="bc-home" href="https://hiroba.ca">Hiroba</a>
+  <span className="bc-sep">›</span>
+  <a className="bc-mid" href="https://hiroba.ca/quiz-hub/">Quiz Hub</a>
+  <span className="bc-sep">›</span>
+  <span className="bc-current">Schedule Quiz</span>
+</div>
         <div className="mode-toggle">
           <button
             className={`mode-btn ${mode === 'subjects' ? 'active' : ''}`}
