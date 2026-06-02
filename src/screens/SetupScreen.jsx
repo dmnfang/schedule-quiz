@@ -2,8 +2,6 @@ import { useState } from 'react'
 import { SUBJECTS, DAYS, PERIODS, ACTIVITIES, WEEK_DAYS } from '../data.js'
 import './SetupScreen.css'
 
-const QR_URL = 'https://hiroba.ca/schedule-quiz/'
-
 function SetupScreen({ mode, onModeChange, onStartSubjects, onStartWeekly }) {
   const [schedule, setSchedule] = useState({
     monday: Array(6).fill(null),
@@ -18,7 +16,6 @@ function SetupScreen({ mode, onModeChange, onStartSubjects, onStartWeekly }) {
     thursday: null, friday: null, saturday: null, sunday: null,
   })
   const [selectedActivity, setSelectedActivity] = useState(null)
-  const [qrEnlarged, setQrEnlarged] = useState(false)
 
   const handleDragStart = (e, subjectId) => {
     e.dataTransfer.setData('subjectId', subjectId)
@@ -85,12 +82,12 @@ function SetupScreen({ mode, onModeChange, onStartSubjects, onStartWeekly }) {
     <div className="setup-screen">
       <div className="setup-topbar">
         <div className="setup-breadcrumb">
-  <a className="bc-home" href="https://hiroba.ca">Hiroba</a>
-  <span className="bc-sep">›</span>
-  <a className="bc-mid" href="https://hiroba.ca/quiz-hub/">Quiz Hub</a>
-  <span className="bc-sep">›</span>
-  <span className="bc-current">Schedule Quiz</span>
-</div>
+          <a className="bc-home" href="https://dmnfang.github.io">Home</a>
+          <span className="bc-sep">›</span>
+          <a className="bc-mid" href="https://dmnfang.github.io/quiz-hub/">Quiz Hub</a>
+          <span className="bc-sep">›</span>
+          <span className="bc-current">Schedule Quiz</span>
+        </div>
         <div className="mode-toggle">
           <button
             className={`mode-btn ${mode === 'subjects' ? 'active' : ''}`}
@@ -105,18 +102,13 @@ function SetupScreen({ mode, onModeChange, onStartSubjects, onStartWeekly }) {
             Activities
           </button>
         </div>
-        <div className="topbar-actions">
-          <button className="qr-btn" onClick={() => setQrEnlarged(true)}>
-            QR Code
-          </button>
-          <button
-            className="start-btn"
-            disabled={mode === 'subjects' ? !canStartSubjects : !canStartWeekly}
-            onClick={() => mode === 'subjects' ? onStartSubjects(schedule) : onStartWeekly(weeklySchedule)}
-          >
-            Start Quiz
-          </button>
-        </div>
+        <button
+          className="start-btn"
+          disabled={mode === 'subjects' ? !canStartSubjects : !canStartWeekly}
+          onClick={() => mode === 'subjects' ? onStartSubjects(schedule) : onStartWeekly(weeklySchedule)}
+        >
+          Start Quiz
+        </button>
       </div>
 
       <div className="setup-body">
@@ -243,18 +235,6 @@ function SetupScreen({ mode, onModeChange, onStartSubjects, onStartWeekly }) {
           </>
         )}
       </div>
-
-      {qrEnlarged && (
-        <div className="qr-overlay" onClick={() => setQrEnlarged(false)}>
-          <div className="qr-large">
-            <img
-              src={`https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=${encodeURIComponent(QR_URL)}`}
-              alt="QR Code"
-            />
-            <div className="qr-url">{QR_URL}</div>
-          </div>
-        </div>
-      )}
     </div>
   )
 }
