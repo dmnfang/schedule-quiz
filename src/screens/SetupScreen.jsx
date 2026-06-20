@@ -2,21 +2,15 @@ import { useState } from 'react'
 import { SUBJECTS, DAYS, PERIODS, ACTIVITIES, WEEK_DAYS } from '../data.js'
 import './SetupScreen.css'
 
-function SetupScreen({ mode, onModeChange, onStartSubjects, onStartWeekly }) {
-  const [schedule, setSchedule] = useState({
-    monday: Array(6).fill(null),
-    tuesday: Array(6).fill(null),
-    wednesday: Array(6).fill(null),
-    thursday: Array(6).fill(null),
-    friday: Array(6).fill(null),
-  })
+function SetupScreen({
+  mode, onModeChange,
+  schedule, setSchedule,
+  weeklySchedule, setWeeklySchedule,
+  subMode, setSubMode,
+  onStartSubjects, onStartWeekly,
+}) {
   const [selectedSubject, setSelectedSubject] = useState(null)
-  const [weeklySchedule, setWeeklySchedule] = useState({
-    monday: null, tuesday: null, wednesday: null,
-    thursday: null, friday: null, saturday: null, sunday: null,
-  })
   const [selectedActivity, setSelectedActivity] = useState(null)
-  const [subMode, setSubMode] = useState('youbi') // 'youbi' | 'yotei' — Activities mode only
 
   const handleDragStart = (e, subjectId) => {
     e.dataTransfer.setData('subjectId', subjectId)
@@ -125,7 +119,7 @@ function SetupScreen({ mode, onModeChange, onStartSubjects, onStartWeekly }) {
         <button
           className="start-btn"
           disabled={mode === 'subjects' ? !canStartSubjects : !canStartWeekly}
-          onClick={() => mode === 'subjects' ? onStartSubjects(schedule) : onStartWeekly(weeklySchedule, subMode)}
+          onClick={() => mode === 'subjects' ? onStartSubjects() : onStartWeekly()}
         >
           Start Quiz
         </button>

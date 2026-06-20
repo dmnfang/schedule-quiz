@@ -15,24 +15,34 @@ function shuffle(arr) {
 function App() {
   const [screen, setScreen] = useState('setup')
   const [mode, setMode] = useState('subjects') // 'subjects' | 'activities'
-  const [schedule, setSchedule] = useState({})
+
+  // Subjects-mode schedule — lifted so it survives setup <-> quiz navigation
+  const [schedule, setSchedule] = useState({
+    monday: Array(6).fill(null),
+    tuesday: Array(6).fill(null),
+    wednesday: Array(6).fill(null),
+    thursday: Array(6).fill(null),
+    friday: Array(6).fill(null),
+  })
   const [quizOrder, setQuizOrder] = useState([])
-  const [weeklySchedule, setWeeklySchedule] = useState({})
+
+  // Activities-mode schedule — lifted so it survives setup <-> quiz navigation
+  const [weeklySchedule, setWeeklySchedule] = useState({
+    monday: null, tuesday: null, wednesday: null,
+    thursday: null, friday: null, saturday: null, sunday: null,
+  })
   const [weeklyQuizOrder, setWeeklyQuizOrder] = useState([])
   const [weeklySubMode, setWeeklySubMode] = useState('youbi') // 'youbi' | 'yotei'
 
-  const handleStartSubjectsQuiz = (sched) => {
+  const handleStartSubjectsQuiz = () => {
     const days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday']
-    setSchedule(sched)
     setQuizOrder(shuffle(days))
     setScreen('quiz')
   }
 
-  const handleStartWeeklyQuiz = (sched, subMode) => {
+  const handleStartWeeklyQuiz = () => {
     const days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
-    setWeeklySchedule(sched)
     setWeeklyQuizOrder(shuffle(days))
-    setWeeklySubMode(subMode)
     setScreen('weeklyquiz')
   }
 
@@ -42,6 +52,12 @@ function App() {
         <SetupScreen
           mode={mode}
           onModeChange={setMode}
+          schedule={schedule}
+          setSchedule={setSchedule}
+          weeklySchedule={weeklySchedule}
+          setWeeklySchedule={setWeeklySchedule}
+          subMode={weeklySubMode}
+          setSubMode={setWeeklySubMode}
           onStartSubjects={handleStartSubjectsQuiz}
           onStartWeekly={handleStartWeeklyQuiz}
         />
