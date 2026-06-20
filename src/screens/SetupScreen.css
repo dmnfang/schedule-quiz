@@ -45,6 +45,31 @@
   color: var(--text-primary);
 }
 
+.submode-toggle {
+  display: flex;
+  background: var(--surface-panel);
+  border-radius: var(--r-pill);
+  padding: 4px;
+  gap: 4px;
+}
+
+.submode-btn {
+  height: 36px; padding: 0 20px;
+  border-radius: var(--r-pill);
+  border: none;
+  background: transparent;
+  font-family: var(--font-ui);
+  font-size: 14px; font-weight: 700;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.submode-btn.active {
+  background: var(--surface-card);
+  color: var(--text-primary);
+}
+
 .start-btn {
   height: 44px; padding: 0 28px;
   border-radius: var(--r-pill);

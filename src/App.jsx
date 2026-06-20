@@ -19,6 +19,7 @@ function App() {
   const [quizOrder, setQuizOrder] = useState([])
   const [weeklySchedule, setWeeklySchedule] = useState({})
   const [weeklyQuizOrder, setWeeklyQuizOrder] = useState([])
+  const [weeklySubMode, setWeeklySubMode] = useState('youbi') // 'youbi' | 'yotei'
 
   const handleStartSubjectsQuiz = (sched) => {
     const days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday']
@@ -27,10 +28,11 @@ function App() {
     setScreen('quiz')
   }
 
-  const handleStartWeeklyQuiz = (sched) => {
+  const handleStartWeeklyQuiz = (sched, subMode) => {
     const days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
     setWeeklySchedule(sched)
     setWeeklyQuizOrder(shuffle(days))
+    setWeeklySubMode(subMode)
     setScreen('weeklyquiz')
   }
 
@@ -55,6 +57,7 @@ function App() {
         <WeeklyQuizScreen
           schedule={weeklySchedule}
           quizOrder={weeklyQuizOrder}
+          subMode={weeklySubMode}
           onBack={() => setScreen('setup')}
         />
       )}

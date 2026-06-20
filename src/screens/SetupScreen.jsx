@@ -16,6 +16,7 @@ function SetupScreen({ mode, onModeChange, onStartSubjects, onStartWeekly }) {
     thursday: null, friday: null, saturday: null, sunday: null,
   })
   const [selectedActivity, setSelectedActivity] = useState(null)
+  const [subMode, setSubMode] = useState('youbi') // 'youbi' | 'yotei' — Activities mode only
 
   const handleDragStart = (e, subjectId) => {
     e.dataTransfer.setData('subjectId', subjectId)
@@ -88,6 +89,7 @@ function SetupScreen({ mode, onModeChange, onStartSubjects, onStartWeekly }) {
           <span className="bc-sep">›</span>
           <span className="bc-current">Schedule Quiz</span>
         </div>
+
         <div className="mode-toggle">
           <button
             className={`mode-btn ${mode === 'subjects' ? 'active' : ''}`}
@@ -102,10 +104,28 @@ function SetupScreen({ mode, onModeChange, onStartSubjects, onStartWeekly }) {
             Activities
           </button>
         </div>
+
+        {mode === 'activities' && (
+          <div className="submode-toggle">
+            <button
+              className={`submode-btn ${subMode === 'youbi' ? 'active' : ''}`}
+              onClick={() => setSubMode('youbi')}
+            >
+              Days
+            </button>
+            <button
+              className={`submode-btn ${subMode === 'yotei' ? 'active' : ''}`}
+              onClick={() => setSubMode('yotei')}
+            >
+              Plans
+            </button>
+          </div>
+        )}
+
         <button
           className="start-btn"
           disabled={mode === 'subjects' ? !canStartSubjects : !canStartWeekly}
-          onClick={() => mode === 'subjects' ? onStartSubjects(schedule) : onStartWeekly(weeklySchedule)}
+          onClick={() => mode === 'subjects' ? onStartSubjects(schedule) : onStartWeekly(weeklySchedule, subMode)}
         >
           Start Quiz
         </button>
